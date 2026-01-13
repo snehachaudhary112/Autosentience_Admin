@@ -3,9 +3,13 @@ import { createClient } from "@supabase/supabase-js";
 import { format, subDays, startOfDay, endOfDay } from "date-fns";
 
 // Initialize Supabase client
-const supabaseUrl = "https://dbzfjoonimkbrsajtkwf.supabase.co";
-const supabaseKey =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRiemZqb29uaW1rYnJzYWp0a3dmIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NDg2MTM5NCwiZXhwIjoyMDgwNDM3Mzk0fQ.h49v9LU_RCDgUREVkjL7lX4XqB0abCW6ytiZLM43zmw";
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseKey) {
+  console.error("Supabase credentials are missing. Please check your environment variables.");
+}
+
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 const AdminDashboard = () => {
